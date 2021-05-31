@@ -10,17 +10,17 @@ $msg['message'] = '';
 
 
 // CHECK IF RECEIVED DATA FROM THE REQUEST
-if(isset($data->element_couvert) && isset($data->prix_couvert)){
+if(isset($data->id_repas) && isset($data->id_couvert)){
     // CHECK DATA VALUE IS EMPTY OR NOT
-    if(!empty($data->element_couvert)&&!empty($data->prix_couvert)){
+    if(!empty($data->id_repas) && !empty($data->id_couvert)){
         
-        $insert_query = "INSERT INTO tbl_couvert (element_couvert,prix_couvert) VALUES (:element_couvert,:prix_couvert)";
+        $insert_query = "INSERT INTO tbl_repas_couvert (id_repas,id_couvert) VALUES (:id_repas,:id_couvert)";
         
         $insert_stmt = $conn->prepare($insert_query);
 
         // DATA BINDING
-        $insert_stmt->bindValue(':element_couvert', htmlspecialchars(strip_tags($data->element_couvert)),PDO::PARAM_STR);
-        $insert_stmt->bindValue(':prix_couvert', htmlspecialchars(strip_tags($data->prix_couvert)),PDO::PARAM_STR);
+        $insert_stmt->bindValue(':id_repas', htmlspecialchars(strip_tags($data->id_repas)),PDO::PARAM_STR);
+        $insert_stmt->bindValue(':id_couvert', htmlspecialchars(strip_tags($data->id_couvert)),PDO::PARAM_STR);
         
         if($insert_stmt->execute()){
             $msg['message'] = 'Data Inserted Successfully';
